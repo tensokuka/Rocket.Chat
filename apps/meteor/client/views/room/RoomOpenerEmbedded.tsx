@@ -39,8 +39,16 @@ const RoomOpenerEmbedded = ({ type, reference }: RoomOpenerProps): ReactElement 
 
 	const subscribeToNotifyUser = useStream('notify-user');
 
-	const rid = data?.rid;
-	const { data: subscriptionData, refetch } = useQuery({
+	// In embedded mode, EmbeddedPreload marks the subscription store as ready without loading data (by design, for lightweight iframe views).
+	// This causes useOpenRoom to throw NotSubscribedToRoomError when checking the empty local store, even if the user is subscribed.
+	// We extract rid from the error to verify actual subscription status via REST API below.
+	const rid = data?.rid ?? (error instanceof NotSubscribedToRoomError ? error.details.rid : undefined);
+
+	const {
+		data: subscriptionData,
+		refetch,
+		isLoading: isLoadingSubscription,
+	} = useQuery({
 		queryKey: rid ? subscriptionsQueryKeys.subscription(rid) : [],
 		queryFn: () => {
 			if (!rid) {
@@ -78,16 +86,19 @@ const RoomOpenerEmbedded = ({ type, reference }: RoomOpenerProps): ReactElement 
 
 	const { t } = useTranslation();
 
+	const isSubscribed = !!subscriptionData?.subscription;
+
 	return (
 		<Box display='flex' w='full' h='full'>
 			<Suspense fallback={<RoomSkeleton />}>
-				{isLoading && <RoomSkeleton />}
-				{isSuccess && (
-					<RoomProvider rid={data.rid}>
+				{(isLoading || isLoadingSubscription) && <RoomSkeleton />}
+				{rid && (isSuccess || isSubscribed) && (
+					<RoomProvider rid={rid}>
 						<Room />
 					</RoomProvider>
 				)}
 				{isError &&
+					!isSubscribed &&
 					(() => {
 						if (error instanceof OldUrlRoomError) {
 							return <RoomSkeleton />;

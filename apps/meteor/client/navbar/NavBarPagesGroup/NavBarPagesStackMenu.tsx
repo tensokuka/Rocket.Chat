@@ -30,12 +30,12 @@ const NavBarPagesStackMenu = (props: NavBarPagesStackMenuProps) => {
 			content: t('Home'),
 			onClick: handleGoToHome,
 		},
-		{
+		{ /*{
 			id: 'directory',
 			icon: 'notebook-hashtag',
 			content: t('Directory'),
 			onClick: () => router.navigate('/directory'),
-		},
+		} */},
 	].filter(Boolean) as GenericMenuItemProps[];
 
 	return (

@@ -16,6 +16,9 @@ import './scripts';
 export * from './inject';
 
 Meteor.startup(() => {
+	// Add viewport meta tag with mobile optimizations using rawHead for guaranteed injection
+	Inject.rawHead('viewport_meta', '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1, minimum-scale=1" />');
+
 	Tracker.autorun(() => {
 		const injections = Object.values(headInjections.all()).filter((injection): injection is NonNullable<typeof injection> => !!injection);
 		Inject.rawModHtml('headInjections', applyHeadInjections(injections));

@@ -3,11 +3,11 @@ import { useLayout, usePermission } from '@rocket.chat/ui-contexts';
 import { useTranslation } from 'react-i18next';
 
 import NavBarItemCreateNew from './NavBarItemCreateNew';
-import NavBarItemDirectoryPage from './NavBarItemDirectoryPage';
+// import NavBarItemDirectoryPage from './NavBarItemDirectoryPage';
 import NavBarItemHomePage from './NavBarItemHomePage';
 import NavBarItemMarketPlaceMenu from './NavBarItemMarketPlaceMenu';
 import NavBarItemSort from './NavBarItemSort';
-import NavBarPagesStackMenu from './NavBarPagesStackMenu';
+// import NavBarPagesStackMenu from './NavBarPagesStackMenu';
 
 const NavBarPagesGroup = () => {
 	const { t } = useTranslation();
@@ -19,13 +19,7 @@ const NavBarPagesGroup = () => {
 
 	return (
 		<NavBarGroup aria-label={t('Pages_and_actions')}>
-			{isTablet && <NavBarPagesStackMenu />}
-			{!isTablet && (
-				<>
-					<NavBarItemHomePage title={t('Home')} />
-					<NavBarItemDirectoryPage title={t('Directory')} />
-				</>
-			)}
+			<NavBarItemHomePage title={t('Home')} />
 			{showMarketplace && !isMobile && <NavBarItemMarketPlaceMenu />}
 			{!isMobile && <NavBarItemSort />}
 			<NavBarItemCreateNew />

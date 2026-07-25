@@ -7,4 +7,6 @@
 	height: 100vh;
 	padding: 0;
 	block-size: -webkit-fill-available;
+	/* Ensure background color extends behind notch/Dynamic Island on iOS */
+	background-color: var(--rcx-color-surface-default);
 }

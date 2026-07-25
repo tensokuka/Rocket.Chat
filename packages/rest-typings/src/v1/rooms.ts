@@ -362,6 +362,8 @@ type RoomsSaveRoomSettingsProps = {
 	roomAvatar?: string;
 	featured?: boolean;
 	roomName?: string;
+	roomCategory?: string;
+	roomCategoryPosition?: number;
 	roomTopic?: string;
 	roomAnnouncement?: string;
 	roomDescription?: string;
@@ -401,6 +403,14 @@ const RoomsSaveRoomSettingsSchema = {
 		},
 		roomName: {
 			type: 'string',
+			nullable: true,
+		},
+		roomCategory: {
+			type: 'string',
+			nullable: true,
+		},
+		roomCategoryPosition: {
+			type: 'number',
 			nullable: true,
 		},
 		roomTopic: {

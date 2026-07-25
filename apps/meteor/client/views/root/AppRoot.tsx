@@ -19,10 +19,11 @@ const AppRoot = () => (
 				<meta httpEquiv='X-UA-Compatible' content='IE=edge' />
 				<meta name='fragment' content='!' />
 				<meta name='distribution' content='global' />
-				<meta name='viewport' content='width=device-width, initial-scale=1, interactive-widget=resizes-content' />
+				<meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1, minimum-scale=1' />
 				<meta name='rating' content='general' />
 				<meta name='mobile-web-app-capable' content='yes' />
 				<meta name='apple-mobile-web-app-capable' content='yes' />
+				<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
 				<meta name='msapplication-TileImage' content='assets/tile_144.png' />
 				<meta name='msapplication-config' content='images/browserconfig.xml' />
 				<meta property='og:image' content='assets/favicon_512.png' />

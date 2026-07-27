@@ -5,7 +5,7 @@ Project requirements:
             (python 3.13.11, system version, no venv/conda)
 
     Dependencies:
-        - NodeJS:v22.16.0 
+        - NodeJS:v22.22.3 
             (pacman) 
         - Yarn:v4.12.0 
             (pacman) 
@@ -23,3 +23,31 @@ Build / Run (local):
     to run:
         'yarn dsv'
 
+
+Build For deployment:
+
+Produce the build bundle
+yarn build:ci
+
+to test the prod build files:
+
+ install npm
+ cd /tmp/dist/bundle/programs/server
+ npm install --production
+
+run the server
+ cd /tmp/dist/bundle
+ PORT=3000 ROOT_URL=http://localhost:3000 MONGO_URL='mongodb://192.168.68.132:27017/rocketchat?replicaSet=rs01' node main.js
+
+remove installed node modules
+rm -rf node_modules
+
+comppress bundle
+
+Move to host machine
+
+extract
+ PORT=3000 ROOT_URL=http://localhost:3000 MONGO_URL='mongodb://192.168.68.132:27017/rocketchat?replicaSet=rs01' node main.js
+
+Officiall Reference document:
+https://docs.rocket.chat/docs/deploy-with-ubuntu

@@ -54,6 +54,7 @@ export type UsersSetPreferencesParamsPOST = {
 		mentionsWithSymbol?: boolean;
 		desktopNotificationVoiceCalls?: boolean;
 		sidebarCustomCategoryOrder?: string[];
+		utcOffset?: number;
 	};
 };
 
@@ -272,6 +273,9 @@ const UsersSetPreferencesParamsPostSchema = {
 				sidebarCustomCategoryOrder: {
 					type: 'array',
 					items: { type: 'string' },
+				},
+				utcOffset: {
+					type: 'number',
 					nullable: true,
 				},
 			},

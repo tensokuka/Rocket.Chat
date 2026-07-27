@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useUnreadDisplay } from '../hooks/useUnreadDisplay';
 
-type RoomListCollapserProps = {
+export type RoomListCollapserProps = {
 	group: string;
 	groupTitle: string;
 	collapsedGroups: string[];

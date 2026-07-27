@@ -1,5 +1,5 @@
 import type { IMessage, IThreadMainMessage } from '@rocket.chat/core-typings';
-import { isEditedMessage } from '@rocket.chat/core-typings';
+import { isEditedMessage, isThreadMainMessage } from '@rocket.chat/core-typings';
 import { Box, CheckBox, Field, FieldLabel, FieldRow } from '@rocket.chat/fuselage';
 import { clientCallbacks, ContextualbarContent } from '@rocket.chat/ui-client';
 import { useMethod, useTranslation, useUserPreference, useRoomToolbox } from '@rocket.chat/ui-contexts';
@@ -15,7 +15,7 @@ import { useChat } from '../../../contexts/ChatContext';
 import { useRoom, useRoomSubscription } from '../../../contexts/RoomContext';
 import { DateListProvider } from '../../../providers/DateListProvider';
 
-type ThreadChatProps = {
+export type ThreadChatProps = {
 	mainMessage: IThreadMainMessage;
 };
 
@@ -113,6 +113,7 @@ const ThreadChat = ({ mainMessage }: ThreadChatProps) => {
 					<RoomComposer aria-label={t('Thread_composer')}>
 						<ComposerContainer
 							tmid={mainMessage._id}
+							threadExists={isThreadMainMessage(mainMessage)}
 							subscription={subscription}
 							onSend={handleSend}
 							onEscape={handleComposerEscape}
@@ -128,7 +129,7 @@ const ThreadChat = ({ mainMessage }: ThreadChatProps) => {
 										onChange={() => setSendToChannel((checked) => !checked)}
 										name='alsoSendThreadToChannel'
 									/>
-									<FieldLabel mis='x8' htmlFor={sendToChannelID} color='annotation' fontScale='p2'>
+									<FieldLabel marginInlineStart='x8' htmlFor={sendToChannelID} color='annotation' fontScale='p2'>
 										{t('Also_send_to_channel')}
 									</FieldLabel>
 								</FieldRow>
